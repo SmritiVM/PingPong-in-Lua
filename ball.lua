@@ -12,13 +12,31 @@ end
 
 function Ball:update(dt)
     self:move(dt)
+    self:collide()
 end
 
+function Ball:collide()
+    if checkCollision(self, Player) then
+       self.xVel = self.speed
+
+       --finding the middle point of the ball
+       --so that ball can move upwards if it collides with upper half of player
+       --and move downwards if it collides with lower half
+
+        local middleBall = self.y + self.height / 2
+        local middlePlayer = Player.y + Player.height / 2
+        local collisionPosition = middleBall - middlePlayer
+        self.yVel = collisionPosition * 5
+    end
+
+end
 function Ball:move(dt)
     self.x = self.x + self.xVel * dt
     self.y = self.y + self.yVel * dt
 end
 
 function Ball:draw()
-
+    love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
 end
+
+
