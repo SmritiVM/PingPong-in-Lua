@@ -9,6 +9,11 @@ function Player:load()
 end
 
 function Player:update(dt)
+    self:move(dt)
+    self:checkBoundaries(dt)
+end
+
+function Player:move(dt)
     --moving up, W key
     if love.keyboard.isDown("w") then --isDown is used to test whether a specific key is pressed
         self.y = self.y - self.speed * dt
@@ -19,6 +24,9 @@ function Player:update(dt)
     
     end
 
+end
+
+function Player:checkBoundaries(dt)
     --preventing player from going out of window
     --Top
     if self.y < 0 then
