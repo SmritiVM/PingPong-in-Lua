@@ -16,6 +16,7 @@ function Ball:update(dt)
 end
 
 function Ball:collide()
+    --PLAYER
     if checkCollision(self, Player) then
        self.xVel = self.speed
 
@@ -28,6 +29,20 @@ function Ball:collide()
         local collisionPosition = middleBall - middlePlayer
         self.yVel = collisionPosition * 5
     end
+
+    --OPPONENT AI  
+    if checkCollision(self, AI) then
+        self.xVel = -self.speed --so that ball can travel back towards player
+ 
+        --finding the middle point of the ball
+        --so that ball can move upwards if it collides with upper half of player
+        --and move downwards if it collides with lower half
+ 
+         local middleBall = self.y + self.height / 2
+         local middleAI = AI.y + AI.height / 2
+         local collisionPosition = middleBall - middleAI
+         self.yVel = collisionPosition * 5
+     end
 
     --setting boundaries
     if self.y < 0 then

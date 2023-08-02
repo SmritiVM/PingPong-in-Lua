@@ -22,7 +22,7 @@ function AI:update(dt)
 end
 
 function AI:move(dt)
-    self.y = self.y + self.yVel /8 dt
+    self.y = self.y + self.yVel * dt
 end
 
 function AI:acquireTarget()
@@ -31,10 +31,11 @@ function AI:acquireTarget()
         self.yVel = -self.yVel
     
     --if the ball is below the paddle, it will move downwards
-    elseif Ball.y > self,y + self.height then
-        self.yVel - self.speed
+    elseif Ball.y > self.y + self.height then
+        self.yVel = self.speed
     else
         self.yVel = 0
+    end
 end
 
 function AI:draw()
