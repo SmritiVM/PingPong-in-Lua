@@ -29,6 +29,17 @@ function Ball:collide()
         self.yVel = collisionPosition * 5
     end
 
+    --setting boundaries
+    if self.y < 0 then
+        self.y = 0
+        self.yVel = -self.yVel --reversing direction of ball
+
+    elseif self.y + self.height > love.graphics.getHeight() then
+        self.y = love.graphics.getHeight() - self.height
+        self.yVel = -self.yVel
+
+    end
+
 end
 function Ball:move(dt)
     self.x = self.x + self.xVel * dt
