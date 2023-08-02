@@ -55,6 +55,23 @@ function Ball:collide()
 
     end
 
+    --if AI scores
+    if self.x < 0 then
+        self.x = love.graphics.getWidth() / 2 - self.width / 2
+        self.y = love.graphics.getHeight() / 2 - self.height / 2
+        self.yVel = 0
+        self.xVel = self.speed
+    end
+
+    --if Player scores
+    if self.x + self.width > love.graphics.getWidth() then
+        self.x = love.graphics.getWidth() / 2 - self.width / 2
+        self.y = love.graphics.getHeight() / 2 - self.height / 2
+        self.yVel = 0
+        self.xVel = -self.speed
+    end
+
+
 end
 function Ball:move(dt)
     self.x = self.x + self.xVel * dt
