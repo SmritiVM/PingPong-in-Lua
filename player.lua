@@ -33,7 +33,7 @@ function Player:checkBoundaries(dt)
         self.y = 0
 
     --Bottom
-    else self.y + self.height > love.graphics.getHeight() then
+    elseif self.y + self.height > love.graphics.getHeight() then
         self.y = love.graphics.getHeight() - self.height 
 
     end
